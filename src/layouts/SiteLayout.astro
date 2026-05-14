@@ -1,4 +1,5 @@
 ---
+import EtsySoon from "../components/EtsySoon.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -32,8 +33,12 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? "https://hogsplitter
     ) : (
       <meta name="twitter:card" content="summary" />
     )}
-    <link rel="icon" href="/images/logo-640.png" type="image/png" sizes="any" />
-    <link rel="apple-touch-icon" href="/images/logo-640.png" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg" />
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
     <title>{title}</title>
   </head>
   <body>
@@ -52,7 +57,7 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? "https://hogsplitter
           <a href="/guide/">Guide</a>
           <a href="/#photos">Photos</a>
           <a href="/#contact">Contact</a>
-          <a class="button-secondary" href="https://www.etsy.com/shop/HugsCurlingTech">Shop on Etsy</a>
+          <EtsySoon variant="button-secondary" />
         </nav>
       </header>
       <main>

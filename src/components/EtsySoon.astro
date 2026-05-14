@@ -1,0 +1,43 @@
+---
+export interface Props {
+  variant?: "button" | "button-secondary" | "inline";
+  /** Primary label before hover (default: "Shop on Etsy" or "Etsy" for inline). */
+  label?: string;
+}
+
+const { variant = "button", label } = Astro.props;
+
+const displayLabel =
+  label ?? (variant === "inline" ? "Etsy" : "Shop on Etsy");
+
+const buttonClass = variant === "button-secondary" ? "button-secondary" : "button";
+const ariaLabel =
+  variant === "inline"
+    ? "Etsy shop (coming soon)"
+    : `${displayLabel} (coming soon)`;
+---
+
+{
+  variant === "inline" ? (
+    <span class="etsy-inline-soon" aria-label={ariaLabel}>
+      <span class="etsy-inline-soon__stack">
+        <span class="etsy-inline-soon__label">{displayLabel}</span>
+        <span class="etsy-inline-soon__soon" aria-hidden="true">
+          Coming soon!
+        </span>
+      </span>
+    </span>
+  ) : (
+    <span
+      class:list={["etsy-shop-soon", buttonClass]}
+      aria-label={ariaLabel}
+    >
+      <span class="etsy-shop-soon__stack">
+        <span class="etsy-shop-soon__label">{displayLabel}</span>
+        <span class="etsy-shop-soon__soon" aria-hidden="true">
+          Coming soon!
+        </span>
+      </span>
+    </span>
+  )
+}

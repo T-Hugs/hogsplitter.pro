@@ -15,6 +15,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check deploy secrets
+        run: |
+          missing=
+          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then missing="${missing} SSH_PRIVATE_KEY"; fi
+          if [ -z "${{ secrets.SSH_USER }}" ]; then missing="${missing} SSH_USER"; fi
+          if [ -z "${{ secrets.DEPLOY_HOST }}" ]; then missing="${missing} DEPLOY_HOST"; fi
+          if [ -n "$missing" ]; then
+            echo "::error::Missing GitHub Actions secrets:$missing — add them under Repo Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
       - name: Checkout code
         uses: actions/checkout@v4
 

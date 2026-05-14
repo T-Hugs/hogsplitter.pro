@@ -123,6 +123,74 @@ img {
   color: var(--stone);
 }
 
+/* Etsy shop: no link until launch — crossfade to "Coming soon!" on hover */
+.etsy-shop-soon {
+  cursor: default;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.etsy-shop-soon__stack {
+  display: grid;
+  place-items: center;
+}
+
+.etsy-shop-soon__stack > * {
+  grid-area: 1 / 1;
+}
+
+.etsy-shop-soon__label,
+.etsy-shop-soon__soon {
+  transition: opacity 0.22s ease;
+}
+
+.etsy-shop-soon__soon {
+  opacity: 0;
+}
+
+.etsy-shop-soon:hover .etsy-shop-soon__label {
+  opacity: 0;
+}
+
+.etsy-shop-soon:hover .etsy-shop-soon__soon {
+  opacity: 1;
+}
+
+.etsy-inline-soon {
+  display: inline-block;
+  position: relative;
+  cursor: default;
+  user-select: none;
+  color: var(--brand);
+  font-weight: 800;
+}
+
+.etsy-inline-soon__stack {
+  display: inline-grid;
+  place-items: center start;
+}
+
+.etsy-inline-soon__stack > * {
+  grid-area: 1 / 1;
+}
+
+.etsy-inline-soon__label,
+.etsy-inline-soon__soon {
+  transition: opacity 0.22s ease;
+}
+
+.etsy-inline-soon__soon {
+  opacity: 0;
+}
+
+.etsy-inline-soon:hover .etsy-inline-soon__label {
+  opacity: 0;
+}
+
+.etsy-inline-soon:hover .etsy-inline-soon__soon {
+  opacity: 1;
+}
+
 .hero,
 .section,
 .footer-inner {
@@ -563,6 +631,7 @@ h3 {
 
   .hero-actions,
   .hero-actions a,
+  .hero-actions .button,
   .cta-band .button {
     width: 100%;
   }
