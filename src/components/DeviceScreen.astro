@@ -1,0 +1,123 @@
+---
+import "../styles/guide-screens.css";
+
+interface Props {
+  variant: "main" | "idle" | "power" | "settings-auto" | "settings-about" | "about-detail";
+  caption?: string;
+}
+
+const { variant, caption } = Astro.props;
+---
+
+{
+  variant === "main" && (
+    <div class="screen-wrap">
+      <div class="screen screen--main" role="img" aria-label="Simulated main timer screen">
+        <div class="screen__elapsed">12.34</div>
+        <div class="screen__history">
+          <span>2.40</span>
+          <span>8.10</span>
+          <span>3.15</span>
+          <span>—</span>
+          <span>—</span>
+          <span>9.88</span>
+          <span>4.02</span>
+          <span>—</span>
+          <span>—</span>
+          <span>—</span>
+          <span>—</span>
+          <span>—</span>
+        </div>
+        <div class="screen__battery">
+          <span class="battery-pct">72%</span>
+          <span class="battery-icon" aria-hidden="true">
+            <span class="battery-fill" />
+          </span>
+        </div>
+      </div>
+      {caption ? <p class="screen__caption">{caption}</p> : null}
+    </div>
+  )
+}
+
+{
+  variant === "idle" && (
+    <div class="screen-wrap">
+      <div class="screen screen--dash screen--main" role="img" aria-label="Simulated idle-cleared display">
+        <div class="screen__elapsed">--.--</div>
+        <div class="screen__history">
+          <span>2.40</span>
+          <span>8.10</span>
+          <span>3.15</span>
+          <span>—</span>
+        </div>
+        <div class="screen__battery">
+          <span class="battery-pct">72%</span>
+          <span class="battery-icon" aria-hidden="true">
+            <span class="battery-fill" />
+          </span>
+        </div>
+      </div>
+      {caption ? <p class="screen__caption">{caption}</p> : null}
+    </div>
+  )
+}
+
+{
+  variant === "power" && (
+    <div class="screen-wrap">
+      <div class="screen screen--power" role="img" aria-label="Simulated power-off screen">
+        <div class="screen__title">Power Off</div>
+        <div class="screen__sub">Press PWR to wake</div>
+        <div class="screen__rule" />
+        <div class="screen__footer">Hog Splitter Pro · battery 72% (example)</div>
+      </div>
+      {caption ? <p class="screen__caption">{caption}</p> : null}
+    </div>
+  )
+}
+
+{
+  variant === "settings-auto" && (
+    <div class="screen-wrap">
+      <div class="screen screen--settings" role="img" aria-label="Simulated Auto-shutoff settings screen">
+        <div class="screen__title">Auto-shutoff</div>
+        <div class="screen__rule" />
+        <div class="screen__value">15 minutes</div>
+      </div>
+      {caption ? <p class="screen__caption">{caption}</p> : null}
+    </div>
+  )
+}
+
+{
+  variant === "settings-about" && (
+    <div class="screen-wrap">
+      <div class="screen screen--settings" role="img" aria-label="Simulated About settings summary">
+        <div class="screen__title screen__title--twoline">
+          <span>About</span>
+          <span>Hog Splitter Pro</span>
+        </div>
+        <div class="screen__rule" />
+      </div>
+      {caption ? <p class="screen__caption">{caption}</p> : null}
+    </div>
+  )
+}
+
+{
+  variant === "about-detail" && (
+    <div class="screen-wrap">
+      <div class="screen screen--about" role="img" aria-label="Simulated About detail screen">
+        <div class="screen__body">
+          <strong>Hog Splitter Pro</strong>
+          <div class="line">Version 1.0</div>
+          <div class="line">Developed by</div>
+          <div class="line">Trevor Gau</div>
+          <div class="screen__url">https://hogsplitter.pro</div>
+        </div>
+      </div>
+      {caption ? <p class="screen__caption">{caption}</p> : null}
+    </div>
+  )
+}

@@ -1,0 +1,183 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+  title="Hog Splitter Pro | Precision stopwatch for curling"
+  description="Hog Splitter Pro is a revolutionary stopwatch for curlers: stateless splits, paired back-to-hog and hog-to-hog history, e-paper display, and USB-C charging."
+  ogImage="/images/prototype.jpg"
+>
+  <section class="hero">
+    <div>
+      <h1 class="hero-tagline">Never miss another split</h1>
+      <div class="marketing-copy">
+        <p>
+          Hog Splitter Pro is a revolutionary stopwatch crafted specifically for curlers. My mission was to create a tool
+          that meets the unique timing needs of the sport with simplicity and efficiency.
+        </p>
+        <ul>
+          <li>Capture back-to-hog and hog-to-hog times for the same shot with just three button presses.</li>
+          <li>Completely stateless design - no resets or modes to confuse you, and no annoying alarms.</li>
+          <li>A large, glanceable history of times - no scrolling or cycling required.</li>
+        </ul>
+        <p>
+          Unlike other stopwatches on the market, Hog Splitter Pro combines all these features into one elegant device.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a class="button" href="https://www.etsy.com/shop/HugsCurlingTech">Shop on Etsy</a>
+        <a class="button-secondary" href="/guide/">Read the product guide</a>
+      </div>
+    </div>
+    <div class="hero-screen-aside">
+      <img
+        class="hero-product-photo"
+        src="/images/prototype.jpg"
+        alt="Hog Splitter Pro handheld timer with e-paper display in its 3D-printed housing"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="marketing-copy">
+      <h2>How it works</h2>
+      <ol>
+        <li>
+          Each time you press the Split button, the main time readout shows the amount of time that elapsed between the
+          last 2 button presses.
+        </li>
+        <li>Times are also shown in the history table - 6 rows of times are displayed by default.</li>
+        <li>
+          Any times less than 5.5 seconds are added to the left column, and times greater than 5.5 seconds are added to
+          the right column.
+        </li>
+        <li>
+          If a &quot;short time&quot; is immediately followed by a &quot;long time&quot;, the two will be paired up on
+          the same row. This allows the user to easily correlate the short time and long time for the same shot.
+        </li>
+      </ol>
+      <p>
+        The two top split buttons behave the same way—there are two for ergonomics, not for different modes. Press
+        either one to register a split.
+      </p>
+      <p>
+        For very long gaps between splits: intervals over 20 seconds are not added to scrollable history (the main
+        readout still updates until the next rule applies). Over 59 seconds between splits, the large display shows a
+        dashed placeholder; the exact pattern follows your main timer precision setting. Details are in the
+        <a href="/guide/#timing">product guide</a>.
+      </p>
+      <p>There&apos;s no concept of a &quot;reset&quot;—just keep splitting!</p>
+      <p>
+        Hog Splitter Pro features a large e-paper display (the same technology found in most e-readers) that is highly
+        visible from any angle. It comes with a USB-C rechargeable battery that lasts many hours on a single charge -
+        enough to get you through a bonspiel.
+      </p>
+      <p>
+        Hog Splitter Pro is customizable to meet your needs. You can customize the volume, pitch, and duration of the
+        &quot;beep&quot; (or turn it off completely!) You can choose from 3 different font sizes for this history display.
+        You can even change the level of precision on the display: tenths, hundredths, or thousandths.
+      </p>
+
+      <h2>Design and materials</h2>
+      <p>
+        Built using a programmable microcontroller with an e-ink display, Hog Splitter Pro is housed in a custom
+        3D-printed ergonomic design.
+      </p>
+
+      <h2>Practical notes</h2>
+      <p>
+        As a device developed and iterated quickly for real ice use, there are a few areas worth being upfront about:
+      </p>
+      <h3>Battery life</h3>
+      <p>
+        It lasts several hours—often enough for an entire event—but needs to be charged periodically. For important
+        sessions, start from a full charge shortly before you play.
+      </p>
+      <h3>Durability</h3>
+      <p>
+        Several early users have used their Hog Splitter Pro for an entire season with no issues. That said, extra care should be taken with a manually-assembled device. Furthermore, e-paper display may
+        be sensitive to UV light or high temperatures (for example, leaving the unit in a hot car).
+      </p>
+      <h3>Display refresh</h3>
+      <p>
+        E-paper can leave faint ghosting between refreshes. Most curlers will not find it distracting for split timing,
+        but it is something to be aware of.
+      </p>
+
+      <h2>Frequently asked questions</h2>
+      <h3>How do you reset it?</h3>
+      <p>
+        You don&apos;t. Hog Splitter Pro is designed to be stateless with no interval reset in normal use—just keep
+        splitting. (There is a small recessed hardware reset for rare lockups; see the <a href="/guide/#power">guide</a>.)
+      </p>
+      <h3>How long does it take to charge?</h3>
+      <p>About 2–3 hours via USB-C.</p>
+      <h3>How much does it cost?</h3>
+      <p>
+        Hog Splitter Pro is sold through the Hugs Curling Tech shop on
+        <a href="https://www.etsy.com/shop/HugsCurlingTech">Etsy</a>. The base price is $70.00 USD, and customizations can be added for an additional fee.
+      </p>
+
+      <h2>Acknowledgements</h2>
+      <p>
+        A special thank you to Derek Corbett for his invaluable help with 3D CAD design and playtesting. I also extend my
+        gratitude to Drew Tingen for brainstorming ideas and contributing to playtesting.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="photos" aria-labelledby="photos-heading">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Product photos</p>
+        <h2 id="photos-heading">Gallery</h2>
+      </div>
+      
+    </div>
+    <div class="photo-grid">
+      <img
+        src="/images/prototype.jpg"
+        alt="Hog Splitter Pro handheld timer with e-paper display in its 3D-printed housing"
+        loading="lazy"
+      />
+      <div class="photo-stack">
+        <img
+          src="/images/hsp-off-with-clip-800.jpg"
+          alt="Hog Splitter Pro powered off with belt clip visible"
+          loading="lazy"
+        />
+        <img
+          src="/images/hsp-press-800.jpg"
+          alt="Pressing a split button on Hog Splitter Pro"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="shop-heading">
+    <div class="cta-band">
+      <div>
+        <p class="eyebrow">Hugs Curling Tech on Etsy</p>
+        <h2 id="shop-heading">Shop Hog Splitter Pro</h2>
+        <p>Order from the Hugs Curling Tech Etsy shop.</p>
+      </div>
+      <a class="button" href="https://www.etsy.com/shop/HugsCurlingTech">Shop on Etsy</a>
+    </div>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-heading">
+    <div class="contact-card">
+      <div>
+        <p class="eyebrow">Get in touch</p>
+        <h2 id="contact-heading">Contact</h2>
+        <p class="contact-card__lede">
+          Have questions about Hog Splitter Pro, your order, or want to collaborate? Reach out.
+        </p>
+      </div>
+      <a class="contact-email" href="mailto:hogsplitter@tgau.me">hogsplitter@tgau.me</a>
+    </div>
+  </section>
+</SiteLayout>

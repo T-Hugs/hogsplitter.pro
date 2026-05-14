@@ -1,0 +1,343 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import DeviceScreen from "../../components/DeviceScreen.astro";
+import "../../styles/guide-page.css";
+---
+
+<SiteLayout
+  title="Hog Splitter Pro Guide | Controls, settings, and timing behavior"
+  description="User guide for Hog Splitter Pro: controls, display, history, settings, charging, and reset."
+  ogImage="/images/prototype.jpg"
+>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Product guide</p>
+      <h1>Hog Splitter Pro</h1>
+      <p class="lead">This guide describes operation of the Hog Splitter Pro.</p>
+      <div class="hero-actions">
+        <a class="button" href="https://www.etsy.com/shop/HugsCurlingTech">Shop on Etsy</a>
+        <a class="button-secondary" href="/">Back to homepage</a>
+      </div>
+    </div>
+    <div class="hero-screen-aside">
+      <img
+        class="hero-product-photo"
+        src="/images/prototype.jpg"
+        alt="Hog Splitter Pro handheld timer with e-paper display in its 3D-printed housing"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="guide-layout">
+      <nav class="guide-nav" aria-label="Guide sections">
+        <a href="#controls">Buttons &amp; names</a>
+        <a href="#housing">Assembly &amp; housing</a>
+        <a href="#power">Power on, off &amp; reset</a>
+        <a href="#timing">Taking splits &amp; display</a>
+        <a href="#idle">Idle &amp; auto shutoff</a>
+        <a href="#settings">Settings</a>
+        <a href="#battery">Battery &amp; charging</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="guide-content">
+        <article class="guide-card" id="controls">
+          <h2>Buttons &amp; names</h2>
+          <p>Throughout this guide, controls are named as on the physical product.</p>
+          <table class="controls">
+            <thead>
+              <tr>
+                <th>Control</th>
+                <th>Photo</th>
+                <th>Typical location / use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Split button</strong></td>
+                <td class="control-photo">
+                  <img
+                    class="control-img"
+                    src="/images/8-split-btn.jpg"
+                    alt="Top two timing buttons"
+                    loading="lazy"
+                  />
+                </td>
+                <td>Top edge (or paired top pads). Registers a split; in settings, confirms and exits.</td>
+              </tr>
+              <tr>
+                <td><strong>Wheel-push</strong></td>
+                <td class="control-photo">
+                  <img
+                    class="control-img"
+                    src="/images/5-wheel-btn-push.jpg"
+                    alt="Scroll wheel pressed straight in"
+                    loading="lazy"
+                  />
+                </td>
+                <td>
+                  Press the scroll wheel straight in. Opens settings (main screen); in settings, moves to the next page.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Wheel-up</strong></td>
+                <td class="control-photo">
+                  <img
+                    class="control-img"
+                    src="/images/5-wheel-btn-up.jpg"
+                    alt="Scroll wheel rocked upward"
+                    loading="lazy"
+                  />
+                </td>
+                <td>Rock wheel up. In settings, increases the current value (or shows About details).</td>
+              </tr>
+              <tr>
+                <td><strong>Wheel-down</strong></td>
+                <td class="control-photo">
+                  <img
+                    class="control-img"
+                    src="/images/5-wheel-btn-down.jpg"
+                    alt="Scroll wheel rocked downward"
+                    loading="lazy"
+                  />
+                </td>
+                <td>Rock wheel down. In settings, decreases the current value (or shows About details).</td>
+              </tr>
+              <tr>
+                <td><strong>Power button</strong></td>
+                <td class="control-photo">
+                  <img
+                    class="control-img"
+                    src="/images/4-power-btn.png"
+                    alt="Side power button"
+                    loading="lazy"
+                  />
+                </td>
+                <td>On the side. Press to power on or to turn off from the main screen.</td>
+              </tr>
+              <tr>
+                <td><strong>Reset button</strong></td>
+                <td class="control-photo">
+                  <img
+                    class="control-img"
+                    src="/images/6-reset-btn.png"
+                    alt="Reset button (access with a pin)"
+                    loading="lazy"
+                  />
+                </td>
+                <td>
+                  Small recessed button; press with a pin for a full reboot (see <a href="#power">Power on, off &amp; reset</a>).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article class="guide-card" id="housing">
+          <h2>Assembly &amp; housing</h2>
+          <h3>Removing the timer module from the 3D-printed housing</h3>
+          <ol>
+            <li>Insert a sturdy string (a shoelace works well) through the holes at the bottom of the unit.</li>
+            <li>
+              Pry the locking tab back while pulling hard with the string, applying even force straight out of the housing.
+            </li>
+          </ol>
+          <p>The housing is friction-fit and can be difficult to remove.</p>
+          <h3>Re-assembling the Hog Splitter Pro</h3>
+          <ol>
+            <li>
+              <p>
+                Insert the button pieces as shown. The orientation and layering must be correct or the buttons will not work.
+              </p>
+              <div class="housing-figure-wrap">
+                <img
+                  class="housing-figure-img"
+                  src="/images/2-buttons.png"
+                  alt="Top two timing buttons"
+                  loading="lazy"
+                />
+              </div>
+            </li>
+            <li>
+              Insert the timer module into the housing, taking care to use the correct orientation and without disturbing the
+              buttons. When fully inserted, you will hear a click as the locking tab moves into place.
+            </li>
+          </ol>
+        </article>
+
+        <article class="guide-card" id="power">
+          <h2>Power on, off &amp; reset</h2>
+          <h3>Power on</h3>
+          <p>
+            Press the <strong>Power button</strong>. The e-paper display starts updating after a short moment while the Hog
+            Splitter Pro boots.
+          </p>
+          <h3>Power off</h3>
+          <p>
+            From the main timer screen, press the <strong>Power button</strong>. The Hog Splitter Pro shows a power-off
+            screen, then shuts down.
+          </p>
+          <DeviceScreen variant="power" caption="Power-off screen" />
+          <h3>Reset</h3>
+          <p>
+            If the Hog Splitter Pro ever misbehaves, use a pin to press the <strong>reset button</strong>. That forces a full
+            reboot, as if power had been removed.
+          </p>
+        </article>
+
+        <article class="guide-card" id="timing">
+          <h2>Taking splits &amp; reading the display</h2>
+          <h3>Main readout</h3>
+          <p>
+            Each press of the <strong>Split button</strong> records a timestamp. The large digits show the elapsed time in
+            seconds between the <em>last two</em> splits. Decimal places for this readout are set in
+            <strong>Settings</strong> → <strong>Main timer precision</strong> (tenths, hundredths, or thousandths). There is
+            no separate “reset” for the interval: the next split always defines a new interval versus the previous press.
+          </p>
+          <DeviceScreen
+            variant="main"
+            caption="Example main screen (medium font): large interval, two-column history (newest near top), battery at bottom right (percentage is illustrative)."
+          />
+          <h3>Long intervals</h3>
+          <ul>
+            <li>
+              <strong>Over 59 seconds</strong> between splits: the large display shows a dashed placeholder (“too long”);
+              the number of dashes after the dot matches your <strong>Main timer precision</strong> setting (for example
+              <code>--.--</code> for hundredths). History rules below still apply only to intervals the Hog Splitter Pro
+              actually stores.
+            </li>
+            <li>
+              <strong>Over 20 seconds</strong>: the interval is <strong>not</strong> added to scrollable history (the large
+              readout still updates until the rules above apply).
+            </li>
+          </ul>
+          <h3>History columns</h3>
+          <p>
+            The Hog Splitter Pro remembers up to ten intervals in history; how many rows you see depends on the
+            <strong>Font size</strong> setting. How many decimal places appear in each history value is set separately under
+            <strong>History precision</strong> (tenths, hundredths, or thousandths)—independent of the main timer.
+          </p>
+          <ul>
+            <li><strong>Small</strong> — 9 rows visible</li>
+            <li><strong>Medium</strong> — 6 rows (default)</li>
+            <li><strong>Large</strong> — 3 rows</li>
+          </ul>
+          <ul>
+            <li>
+              Times <strong>under 5.5 seconds</strong> go in the <strong>left</strong> column as a new row (or start a new
+              paired row).
+            </li>
+            <li>
+              Times <strong>5.5 seconds or greater</strong> (but still ≤ 20 s for history) go in the <strong>right</strong>
+              column. If the previous row has a left value waiting for a partner, the new time fills that row’s right cell;
+              otherwise it starts a new row with only the right cell filled.
+            </li>
+          </ul>
+          <p>
+            This lets you pair a “short” and “long” hog line time for the same shot on one history row when they are entered
+            in that order.
+          </p>
+          <h3>Physical Split button</h3>
+          <p>
+            If your enclosure has two top pads wired to the same input, either can split; a lever-actuated placement can
+            feel slightly different from a direct pad—press firmly if a tap does not register.
+          </p>
+        </article>
+
+        <article class="guide-card" id="idle">
+          <h2>Idle &amp; auto shutoff</h2>
+          <h3>Clearing the main readout after idle</h3>
+          <p>
+            If there has been <strong>no Split button activity for about one minute</strong>, the large elapsed display clears
+            to a dashed placeholder (history is not erased). The pattern matches <strong>Main timer precision</strong> (for
+            example <code>--.--</code> when hundredths are selected). The next split starts fresh timing from that press.
+          </p>
+          <DeviceScreen
+            variant="idle"
+            caption="After idle clear: dashed main readout (example shown for hundredths); history still shows prior runs with History precision formatting."
+          />
+          <h3>Auto shutoff</h3>
+          <p>
+            In <strong>Settings</strong>, <strong>Auto-shutoff</strong> can be set to disabled or to 10 / 15 / 20 / 30 minutes
+            of inactivity. Button activity resets the idle period. After this period of inactivity, the device turns itself
+            off, the same as pressing the <strong>Power button</strong> from the main screen.
+          </p>
+        </article>
+
+        <article class="guide-card" id="settings">
+          <h2>Settings</h2>
+          <p>From the <strong>main timer screen</strong> (not in special boot modes):</p>
+          <ul>
+            <li>Press <strong>Wheel-push</strong> to open settings. The first page is <strong>Auto-shutoff</strong>.</li>
+            <li>
+              <strong>Wheel-push</strong> again cycles pages: Auto-shutoff → Tone volume → Tone pitch → Tone duration → Main
+              timer precision → History precision → Font size → About → (wraps to Auto-shutoff).
+            </li>
+            <li>
+              <strong>Wheel-up</strong> / <strong>Wheel-down</strong> adjust the current page’s value; on tone-related pages,
+              changes are previewed.
+            </li>
+            <li><strong>Split button</strong> saves all settings and returns to the main timer screen.</li>
+          </ul>
+          <DeviceScreen variant="settings-auto" caption="Settings layout: title, horizontal rule, current value centered below." />
+          <h3>Setting reference</h3>
+          <ul>
+            <li><strong>Auto-shutoff</strong> — Disabled, 10 / 15 / 20 / 30 minutes.</li>
+            <li>
+              <strong>Tone volume</strong> — Off or five stepped levels (maximum drive is capped to reduce distortion).
+            </li>
+            <li><strong>Tone pitch</strong> — Five preset frequencies.</li>
+            <li><strong>Tone duration</strong> — Five preset lengths.</li>
+            <li>
+              <strong>Main timer precision</strong> — Tenths, hundredths, or thousandths of a second for the
+              <em>large</em> elapsed readout only (and for the dashed placeholders when idle or “too long”).
+            </li>
+            <li>
+              <strong>History precision</strong> — Tenths, hundredths, or thousandths for numbers in the history columns
+              only (independent of the main timer).
+            </li>
+            <li><strong>Font size</strong> — Small (9 history rows), Medium (6), Large (3).</li>
+            <li>
+              <strong>About Hog Splitter Pro</strong> — Title on two lines; use <strong>Wheel-up</strong> or
+              <strong>Wheel-down</strong> to open the detail screen with version, credit, and product URL.
+              <strong>Wheel-push</strong> returns from the detail to the About page.
+            </li>
+          </ul>
+          <DeviceScreen variant="settings-about" caption="About summary: two-line title." />
+          <DeviceScreen
+            variant="about-detail"
+            caption="About detail: stacked lines; exit or navigate with the same buttons as the rest of settings."
+          />
+        </article>
+
+        <article class="guide-card" id="battery">
+          <h2>Battery &amp; charging</h2>
+          <ul>
+            <li>Use a standard <strong>USB-C</strong> source; 1 A adapters are typically sufficient.</li>
+            <li>Charge time can be on the order of a few hours from empty.</li>
+            <li>A <strong>charging indicator</strong> may light while the battery is charging.</li>
+            <li>Plugging in USB may power the Hog Splitter Pro even when it appears off.</li>
+          </ul>
+          <p class="note">
+            <strong>Battery percentage</strong> — The on-screen percentage is derived from voltage estimates on this
+            hardware class. It can lag until the next full screen refresh, and it may jump or briefly rise when not on
+            charger because of measurement noise and load changes. For critical sessions, start from a
+            <strong>full charge</strong> shortly before play.
+          </p>
+        </article>
+
+        <article class="guide-card" id="contact">
+          <h2>Questions / comments / issues</h2>
+          <p>Contact Trevor Gau.</p>
+          <p><strong>Email:</strong> <a href="mailto:trevorsg@gmail.com">trevorsg@gmail.com</a></p>
+          <p>
+            <strong>Web:</strong>
+            <a href="https://hogsplitter.pro/">hogsplitter.pro</a>
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

@@ -1,0 +1,65 @@
+/* Guide-only: controls table and figure images. */
+
+table.controls {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0 20px;
+  font-size: 0.95rem;
+}
+
+table.controls th,
+table.controls td {
+  border: 1px solid #e4e4e4;
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+table.controls th {
+  background: #f7f9fc;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+table.controls td.control-photo {
+  vertical-align: middle;
+  width: 200px;
+}
+
+table.controls .control-img {
+  display: block;
+  margin: 0;
+  width: 280px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #e8e8e8;
+}
+
+.housing-figure-wrap {
+  margin-top: 12px;
+}
+
+.housing-figure-img {
+  max-width: min(440px, 100%);
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+}
+
+.guide-card table.controls {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  table.controls td.control-photo {
+    width: auto;
+    min-width: 0;
+  }
+
+  table.controls .control-img {
+    width: 100%;
+    max-width: 280px;
+  }
+}

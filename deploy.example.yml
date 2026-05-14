@@ -1,0 +1,78 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches:
+      - preview
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build frontend
+        run: bun run build:frontend
+
+      - name: Build backend
+        run: bun run build:backend
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.STAGING_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Prepare server directories
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.STAGING_HOST }} << 'EOF'
+            sudo mkdir -p /srv/tccnc-web-preview/dist /srv/tccnc-web-preview/backend
+            sudo chown -R ${{ secrets.SSH_USER }}:${{ secrets.SSH_USER }} /srv/tccnc-web-preview || true
+          EOF
+
+      - name: Deploy frontend
+        run: |
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            --exclude='node_modules' \
+            --exclude='.git' \
+            frontend/dist/ ${{ secrets.SSH_USER }}@${{ secrets.STAGING_HOST }}:/srv/tccnc-web-preview/dist/
+
+      - name: Deploy backend
+        run: |
+          rsync -avz \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            --exclude='node_modules' \
+            --exclude='.git' \
+            backend/dist/ backend/package.json \
+            ${{ secrets.SSH_USER }}@${{ secrets.STAGING_HOST }}:/srv/tccnc-web-preview/backend/
+
+      - name: Install production dependencies and restart
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.STAGING_HOST }} << EOF
+            set -e
+            cd /srv/tccnc-web-preview/backend
+            export CI=
+            export GITHUB_ACTIONS=
+            bun install --production
+            sudo mkdir -p /srv/tccnc-web-preview/backend/data
+            sudo chown -R www-data:www-data /srv/tccnc-web-preview/backend
+            sudo chmod 755 /srv/tccnc-web-preview/backend/data
+            sudo systemctl restart ${{ vars.STAGING_SYSTEMD_UNIT || 'tccnc-web-preview' }}
+          EOF

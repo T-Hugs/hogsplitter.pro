@@ -1,0 +1,62 @@
+name: Deploy Hog Splitter Pro
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: hogsplitter-pro-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Prepare server directories
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
+            set -e
+            sudo mkdir -p /srv/hogsplitter.pro/html
+            sudo chown -R $USER:$USER /srv/hogsplitter.pro
+          EOF
+
+      - name: Deploy static files
+        run: |
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            dist/ ${{ secrets.SSH_USER }}@${{ secrets.DEPLOY_HOST }}:/srv/hogsplitter.pro/html/
+
+      - name: Normalize permissions and reload nginx
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
+            set -e
+            sudo find /srv/hogsplitter.pro/html -type d -exec chmod 755 {} \;
+            sudo find /srv/hogsplitter.pro/html -type f -exec chmod 644 {} \;
+            sudo nginx -t
+            sudo systemctl reload nginx
+          EOF
