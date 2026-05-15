@@ -45,8 +45,8 @@ import "../../styles/guide-page.css";
 
       <div class="guide-content">
         <article class="guide-card" id="controls">
-          <h2>Buttons &amp; names</h2>
-          <p>Throughout this guide, controls are named as on the physical product.</p>
+          <h2>Buttons</h2>
+          <p>Hog Splitter Pro consists of a controller unit fitted securely into a 3D-printed housing. All buttons are built into the controller unit.</p>
           <table class="controls">
             <thead>
               <tr>
@@ -66,7 +66,7 @@ import "../../styles/guide-page.css";
                     loading="lazy"
                   />
                 </td>
-                <td>Top edge (or paired top pads). Registers a split; in settings, confirms and exits.</td>
+                <td>Top edge. Registers a split; in settings, confirms and exits.</td>
               </tr>
               <tr>
                 <td><strong>Wheel-push</strong></td>
@@ -79,7 +79,7 @@ import "../../styles/guide-page.css";
                   />
                 </td>
                 <td>
-                  Press the scroll wheel straight in. Opens settings (main screen); in settings, moves to the next page.
+                  Press the scroll wheel straight in (use a small finger). Opens settings (main screen); in settings, moves to the next page.
                 </td>
               </tr>
               <tr>
@@ -92,7 +92,7 @@ import "../../styles/guide-page.css";
                     loading="lazy"
                   />
                 </td>
-                <td>Rock wheel up. In settings, increases the current value (or shows About details).</td>
+                <td>Rock wheel upward. In settings, increases the current value.</td>
               </tr>
               <tr>
                 <td><strong>Wheel-down</strong></td>
@@ -104,7 +104,7 @@ import "../../styles/guide-page.css";
                     loading="lazy"
                   />
                 </td>
-                <td>Rock wheel down. In settings, decreases the current value (or shows About details).</td>
+                <td>Rock wheel downward. In settings, decreases the current value.</td>
               </tr>
               <tr>
                 <td><strong>Power button</strong></td>
@@ -138,11 +138,11 @@ import "../../styles/guide-page.css";
 
         <article class="guide-card" id="housing">
           <h2>Assembly &amp; housing</h2>
-          <h3>Removing the timer module from the 3D-printed housing</h3>
+          <h3>Removing the timer control unit from the 3D-printed housing</h3>
           <ol>
             <li>Insert a sturdy string (a shoelace works well) through the holes at the bottom of the unit.</li>
             <li>
-              Pry the locking tab back while pulling hard with the string, applying even force straight out of the housing.
+              Pry the locking tab back, just enough for the control unit to clear it, while pulling hard with the string, applying even force straight out of the housing.
             </li>
           </ol>
           <p>The housing is friction-fit and can be difficult to remove.</p>
@@ -199,15 +199,12 @@ import "../../styles/guide-page.css";
           </p>
           <DeviceScreen
             variant="main"
-            caption="Example main screen (medium font): large interval, two-column history (newest near top), battery at bottom right (percentage is illustrative)."
+            caption="Example main screen"
           />
           <h3>Long intervals</h3>
           <ul>
             <li>
-              <strong>Over 59 seconds</strong> between splits: the large display shows a dashed placeholder (“too long”);
-              the number of dashes after the dot matches your <strong>Main timer precision</strong> setting (for example
-              <code>--.--</code> for hundredths). History rules below still apply only to intervals the Hog Splitter Pro
-              actually stores.
+              <strong>Over 59 seconds</strong> between splits: the large display shows a dashed placeholder (“too long”).
             </li>
             <li>
               <strong>Over 20 seconds</strong>: the interval is <strong>not</strong> added to scrollable history (the large
@@ -240,30 +237,31 @@ import "../../styles/guide-page.css";
             This lets you pair a “short” and “long” hog line time for the same shot on one history row when they are entered
             in that order.
           </p>
-          <h3>Physical Split button</h3>
+          <h3>Physical Split buttons</h3>
           <p>
-            If your enclosure has two top pads wired to the same input, either can split; a lever-actuated placement can
-            feel slightly different from a direct pad—press firmly if a tap does not register.
+            The 3D-printed housing has two top split buttons. Either can split: both actuate a plunger to the same button on the timer 
+            controller unit. A lever mechanism within the buttons is designed to redirect force from the left plunger to the controller
+            button, which is located under the right-side plunger. Because of this, the left button may require slightly more
+            force to actuate compared to the right button.
           </p>
         </article>
 
         <article class="guide-card" id="idle">
           <h2>Idle &amp; auto shutoff</h2>
-          <h3>Clearing the main readout after idle</h3>
+          <h3>Main timer idle clearing</h3>
           <p>
             If there has been <strong>no Split button activity for about one minute</strong>, the large elapsed display clears
-            to a dashed placeholder (history is not erased). The pattern matches <strong>Main timer precision</strong> (for
-            example <code>--.--</code> when hundredths are selected). The next split starts fresh timing from that press.
+            to a dashed placeholder (history is not erased). The next split starts fresh timing from that press.
           </p>
           <DeviceScreen
             variant="idle"
-            caption="After idle clear: dashed main readout (example shown for hundredths); history still shows prior runs with History precision formatting."
+            caption="After idle clear: dashed main readout; history still shows prior runs."
           />
           <h3>Auto shutoff</h3>
           <p>
             In <strong>Settings</strong>, <strong>Auto-shutoff</strong> can be set to disabled or to 10 / 15 / 20 / 30 minutes
             of inactivity. Button activity resets the idle period. After this period of inactivity, the device turns itself
-            off, the same as pressing the <strong>Power button</strong> from the main screen.
+            off.
           </p>
         </article>
 
@@ -282,7 +280,7 @@ import "../../styles/guide-page.css";
             </li>
             <li><strong>Split button</strong> saves all settings and returns to the main timer screen.</li>
           </ul>
-          <DeviceScreen variant="settings-auto" caption="Settings layout: title, horizontal rule, current value centered below." />
+          <DeviceScreen variant="settings-auto" caption="Settings layout" />
           <h3>Setting reference</h3>
           <ul>
             <li><strong>Auto-shutoff</strong> — Disabled, 10 / 15 / 20 / 30 minutes.</li>
@@ -306,10 +304,9 @@ import "../../styles/guide-page.css";
               <strong>Wheel-push</strong> returns from the detail to the About page.
             </li>
           </ul>
-          <DeviceScreen variant="settings-about" caption="About summary: two-line title." />
           <DeviceScreen
             variant="about-detail"
-            caption="About detail: stacked lines; exit or navigate with the same buttons as the rest of settings."
+            caption="About screen"
           />
         </article>
 
@@ -323,7 +320,7 @@ import "../../styles/guide-page.css";
           </ul>
           <p class="note">
             <strong>Battery percentage</strong> — The on-screen percentage is derived from voltage estimates on this
-            hardware class. It can lag until the next full screen refresh, and it may jump or briefly rise when not on
+            hardware. It can lag until the next full screen refresh, and it may jump or briefly rise when not on
             charger because of measurement noise and load changes. For critical sessions, start from a
             <strong>full charge</strong> shortly before play.
           </p>
@@ -332,7 +329,7 @@ import "../../styles/guide-page.css";
         <article class="guide-card" id="contact">
           <h2>Questions / comments / issues</h2>
           <p>Contact Trevor Gau.</p>
-          <p><strong>Email:</strong> <a href="mailto:trevorsg@gmail.com">trevorsg@gmail.com</a></p>
+          <p><strong>Email:</strong> <a href="mailto:hogsplitter@tgau.me">hogsplitter@tgau.me</a></p>
           <p>
             <strong>Web:</strong>
             <a href="https://hogsplitter.pro/">hogsplitter.pro</a>
