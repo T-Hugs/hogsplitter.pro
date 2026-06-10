@@ -9,16 +9,16 @@ table.controls {
 
 table.controls th,
 table.controls td {
-  border: 1px solid #e4e4e4;
+  border: 1px solid #d9e5ef;
   padding: 10px 12px;
   text-align: left;
   vertical-align: top;
 }
 
 table.controls th {
-  background: #f7f9fc;
-  color: #2c3e50;
-  font-weight: 600;
+  background: #e3f0fa;
+  color: #15263d;
+  font-weight: 700;
 }
 
 table.controls td.control-photo {
@@ -33,7 +33,7 @@ table.controls .control-img {
   max-width: 100%;
   height: auto;
   border-radius: 6px;
-  border: 1px solid #e8e8e8;
+  border: 1px solid #d9e5ef;
 }
 
 .housing-figure-wrap {
@@ -45,7 +45,7 @@ table.controls .control-img {
   height: auto;
   display: block;
   border-radius: 8px;
-  border: 1px solid #e8e8e8;
+  border: 1px solid #d9e5ef;
 }
 
 .guide-card table.controls {
