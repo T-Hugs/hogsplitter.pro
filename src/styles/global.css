@@ -464,6 +464,12 @@ h3 {
   background: #fff;
 }
 
+.photo-grid .photo-wide {
+  grid-column: 1 / -1;
+  height: auto;
+  min-height: 0;
+}
+
 .photo-placeholder {
   display: flex;
   align-items: center;

@@ -2,12 +2,18 @@
 import DeviceScreen from "../components/DeviceScreen.astro";
 import EtsySoon from "../components/EtsySoon.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
+import testimonialsData from "../../testimonials.json";
+
+const testimonials = testimonialsData.testimonials.map((t) => ({
+  quote: t.testimonial.trim(),
+  author: `${t.first_name} ${t.last_name.charAt(0)}.`,
+}));
 ---
 
 <SiteLayout
   title="Hog Splitter Pro | The stopwatch built for curling"
   description="Hog Splitter Pro is a stopwatch built for curling: paired back-to-hog and hog-to-hog splits, glanceable history, no resets, an e-paper display, and USB-C charging."
-  ogImage="/images/prototype.jpg"
+  ogImage="/images/main.jpg"
 >
   <section class="hero">
     <div>
@@ -32,8 +38,8 @@ import SiteLayout from "../layouts/SiteLayout.astro";
     <div class="hero-screen-aside">
       <img
         class="hero-product-photo"
-        src="/images/prototype.jpg"
-        alt="Hog Splitter Pro handheld timer with e-paper display in its 3D-printed housing"
+        src="/images/main.jpg"
+        alt="Hand holding Hog Splitter Pro with split times on the e-paper display"
         loading="eager"
         fetchpriority="high"
       />
@@ -41,6 +47,37 @@ import SiteLayout from "../layouts/SiteLayout.astro";
   </section>
 
   <hr class="hog-line" />
+
+  <section class="testimonials" aria-label="Customer testimonials">
+    <div
+      class="testimonial-carousel"
+      data-testimonial-carousel
+      data-interval="20000"
+    >
+      <div class="testimonial-viewport">
+        {
+          testimonials.map((t, i) => (
+            <figure
+              class="testimonial-slide"
+              data-testimonial-slide
+              data-active={i === 0 ? "true" : "false"}
+            >
+              <blockquote class="testimonial-quote">{t.quote}</blockquote>
+              <figcaption class="testimonial-author">&mdash; {t.author}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+      <button
+        type="button"
+        class="testimonial-next"
+        data-testimonial-next
+        aria-label="Show next testimonial"
+      >
+        Next &rarr;
+      </button>
+    </div>
+  </section>
 
   <section class="section" id="how" aria-labelledby="how-heading">
     <div class="section-heading">
@@ -224,24 +261,31 @@ import SiteLayout from "../layouts/SiteLayout.astro";
     </div>
     <div class="photo-grid">
       <img
-        src="/images/prototype.jpg"
-        alt="Hog Splitter Pro handheld timer with e-paper display in its 3D-printed housing"
+        src="/images/marketing-1.jpg"
+        alt="Hog Splitter Pro powered off, showing the wake screen"
         loading="lazy"
       />
       <img
-        src="/images/hsp-off-with-clip-800.jpg"
-        alt="Hog Splitter Pro powered off with belt clip visible"
+        src="/images/marketing-2.jpg"
+        alt="Blue Hog Splitter Pro displaying split times"
         loading="lazy"
       />
       <img
-        src="/images/hsp-press-800.jpg"
-        alt="Pressing a split button on Hog Splitter Pro"
+        src="/images/marketing-3.jpg"
+        alt="Hog Splitter Pro with retractable belt clip attached"
         loading="lazy"
       />
-      <!-- TODO: replace placeholder with an on-ice action photo (e.g. timing a stone from behind the hack) -->
-      <div class="photo-placeholder">
-        <span class="photo-placeholder__label">On-ice action photo coming soon</span>
-      </div>
+      <img
+        src="/images/marketing-4.jpg"
+        alt="Hog Splitter Pro powered off with lanyard cord"
+        loading="lazy"
+      />
+      <img
+        class="photo-wide"
+        src="/images/marketing-bottom.jpg"
+        alt="Hog Splitter Pro in bronze, grey, and blue colorways"
+        loading="lazy"
+      />
     </div>
   </section>
 
@@ -273,3 +317,228 @@ import SiteLayout from "../layouts/SiteLayout.astro";
     </p>
   </section>
 </SiteLayout>
+
+<script>
+  const carousel = document.querySelector<HTMLElement>("[data-testimonial-carousel]");
+
+  if (carousel) {
+    const slides = Array.from(
+      carousel.querySelectorAll<HTMLElement>("[data-testimonial-slide]")
+    );
+    const nextBtn = carousel.querySelector<HTMLButtonElement>("[data-testimonial-next]");
+    const intervalMs = Number(carousel.dataset.interval) || 10000;
+
+    const viewport = carousel.querySelector<HTMLElement>(".testimonial-viewport");
+
+    if (slides.length > 1 && viewport) {
+      let current = 0;
+      let timer: ReturnType<typeof setInterval> | undefined;
+
+      // Reserve enough height for the tallest testimonial so swapping slides
+      // never pushes the rest of the page up or down.
+      const reserveHeight = () => {
+        let tallest = 0;
+        for (const slide of slides) {
+          const wasActive = slide.dataset.active;
+          slide.classList.add("is-measuring");
+          slide.dataset.active = "true";
+          tallest = Math.max(tallest, slide.getBoundingClientRect().height);
+          slide.dataset.active = wasActive ?? "false";
+          slide.classList.remove("is-measuring");
+        }
+        viewport.style.minHeight = `${Math.ceil(tallest)}px`;
+      };
+
+      reserveHeight();
+      let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+      window.addEventListener("resize", () => {
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(reserveHeight, 150);
+      });
+
+      const show = (next: number) => {
+        if (next === current) return;
+        const outgoing = slides[current];
+        const incoming = slides[next];
+
+        outgoing.classList.remove("is-entering");
+        incoming.classList.remove("is-leaving");
+
+        // Outgoing flies off to the right (kept visible via .is-leaving).
+        outgoing.dataset.active = "false";
+        outgoing.classList.add("is-leaving");
+        const cleanupOut = () => {
+          outgoing.classList.remove("is-leaving");
+          outgoing.removeEventListener("animationend", cleanupOut);
+        };
+        outgoing.addEventListener("animationend", cleanupOut);
+
+        // Incoming slides in from the left.
+        incoming.dataset.active = "true";
+        // Restart the entering animation cleanly each time.
+        incoming.classList.remove("is-entering");
+        void incoming.offsetWidth;
+        incoming.classList.add("is-entering");
+        const cleanupIn = () => {
+          incoming.classList.remove("is-entering");
+          incoming.removeEventListener("animationend", cleanupIn);
+        };
+        incoming.addEventListener("animationend", cleanupIn);
+
+        current = next;
+      };
+
+      const advance = () => show((current + 1) % slides.length);
+
+      const startTimer = () => {
+        stopTimer();
+        timer = setInterval(advance, intervalMs);
+      };
+      const stopTimer = () => {
+        if (timer) clearInterval(timer);
+        timer = undefined;
+      };
+
+      nextBtn?.addEventListener("click", () => {
+        advance();
+        // Reset the auto-cycle countdown after a manual advance.
+        startTimer();
+      });
+
+      startTimer();
+    }
+  }
+</script>
+
+<style>
+  .testimonials {
+    width: min(1120px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: clamp(1.75rem, 4vw, 2.75rem) 0 0;
+  }
+
+  .testimonial-carousel {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 1.4rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--panel);
+    box-shadow: 0 10px 30px rgba(21, 38, 61, 0.05);
+  }
+
+  .testimonial-viewport {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .testimonial-slide {
+    margin: 0;
+    display: none;
+  }
+
+  .testimonial-slide[data-active="true"],
+  .testimonial-slide.is-leaving {
+    display: block;
+  }
+
+  .testimonial-slide.is-leaving {
+    position: absolute;
+    inset: 0;
+    animation: testimonial-out 0.5s ease forwards;
+  }
+
+  /* Off-screen, non-animated state used only to measure slide heights. */
+  .testimonial-slide.is-measuring {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    height: auto;
+    visibility: hidden;
+    animation: none;
+  }
+
+  .testimonial-slide.is-entering {
+    animation: testimonial-in 0.5s ease forwards;
+  }
+
+  .testimonial-quote {
+    margin: 0;
+    color: #33455c;
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
+    line-height: 1.55;
+  }
+
+  .testimonial-author {
+    margin-top: 0.75rem;
+    color: var(--navy);
+    font-weight: 800;
+  }
+
+  .testimonial-next {
+    flex-shrink: 0;
+    align-self: center;
+    min-height: 2.6rem;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid rgba(21, 38, 61, 0.2);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--navy);
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .testimonial-next:hover {
+    border-color: rgba(21, 38, 61, 0.45);
+    color: var(--brand);
+  }
+
+  @keyframes testimonial-in {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes testimonial-out {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .testimonial-slide.is-leaving,
+    .testimonial-slide.is-entering {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .testimonial-carousel {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .testimonial-next {
+      align-self: flex-end;
+    }
+  }
+</style>

@@ -1,0 +1,27 @@
+{
+  "testimonials": [
+    {
+      "first_name": "Drew",
+      "last_name": "Tingen",
+      "testimonial": "I love my Hog Splitter Pro! With a regular stopwatch, I was regularly forgetting to reset it after timing a rock, or forgetting what the time was 1 or 2 rocks ago. With Hog Splitter Pro, I get all the information I need without having to do anything more than press the big button when the rock crosses a line. Highly recommend!"
+    },
+
+    {
+      "first_name": "Andrew",
+      "last_name": "Pearson",
+      "testimonial": "I hadn't timed rocks with a stopwatch before, but the features on Hog Splitter Pro sounded interesting. Now I can't imagine using anything else! Having the last couple rocks' times is so helpful!"
+    },
+
+    {
+        "first_name": "Derek",
+        "last_name": "Corbett",
+        "testimonial": "Hog Splitter Pro is a game changer. As a skip I value hog to hog times to feedback hit weights to my team and track the speed of the ice. But with a traditional stopwatch I too often reset it before looking at the time, or I forget the time when my teammate asks. This stopwatch has exactly what I need and nothing else to get in the way. I won’t step onto the ice without my Hog Splitter Pro. "
+    },
+
+    {
+        "first_name": "Chris",
+        "last_name": "Wishart",
+        "testimonial": "The Hog Splitter is the best stopwatch for curling I've ever used. I used to forget to clear my old times and mess up my current timing but now that's a thing of the past!"
+    }
+  ]
+}
