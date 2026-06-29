@@ -376,34 +376,47 @@ const testimonials = testimonialsData.testimonials.map((t) => ({
         resizeTimer = setTimeout(reserveHeight, 150);
       });
 
+      const ANIM_MS = 500;
+
+      const afterAnimation = (el: HTMLElement, className: string) => {
+        let done = false;
+        const finish = () => {
+          if (done) return;
+          done = true;
+          el.classList.remove(className);
+          el.removeEventListener("animationend", finish);
+        };
+        el.addEventListener("animationend", finish);
+        // Fallback when animationend never fires (reduced motion, interrupted, etc.).
+        window.setTimeout(finish, ANIM_MS + 50);
+      };
+
       const show = (next: number) => {
         if (next === current) return;
         const outgoing = slides[current];
         const incoming = slides[next];
 
+        // Drop stale animation state left by interrupted or skipped transitions.
+        for (const slide of slides) {
+          if (slide === outgoing || slide === incoming) continue;
+          slide.classList.remove("is-leaving", "is-entering");
+          slide.dataset.active = "false";
+        }
+
         outgoing.classList.remove("is-entering");
         incoming.classList.remove("is-leaving");
 
-        // Outgoing flies off to the right (kept visible via .is-leaving).
+        // Outgoing flies off to the left (kept visible via .is-leaving).
         outgoing.dataset.active = "false";
         outgoing.classList.add("is-leaving");
-        const cleanupOut = () => {
-          outgoing.classList.remove("is-leaving");
-          outgoing.removeEventListener("animationend", cleanupOut);
-        };
-        outgoing.addEventListener("animationend", cleanupOut);
+        afterAnimation(outgoing, "is-leaving");
 
-        // Incoming slides in from the left.
+        // Incoming slides in from the right.
         incoming.dataset.active = "true";
-        // Restart the entering animation cleanly each time.
         incoming.classList.remove("is-entering");
         void incoming.offsetWidth;
         incoming.classList.add("is-entering");
-        const cleanupIn = () => {
-          incoming.classList.remove("is-entering");
-          incoming.removeEventListener("animationend", cleanupIn);
-        };
-        incoming.addEventListener("animationend", cleanupIn);
+        afterAnimation(incoming, "is-entering");
 
         current = next;
       };
@@ -557,7 +570,7 @@ const testimonials = testimonialsData.testimonials.map((t) => ({
   @keyframes testimonial-in {
     from {
       opacity: 0;
-      transform: translateX(-100%);
+      transform: translateX(100%);
     }
     to {
       opacity: 1;
@@ -572,7 +585,7 @@ const testimonials = testimonialsData.testimonials.map((t) => ({
     }
     to {
       opacity: 0;
-      transform: translateX(100%);
+      transform: translateX(-100%);
     }
   }
 
@@ -580,6 +593,10 @@ const testimonials = testimonialsData.testimonials.map((t) => ({
     .testimonial-slide.is-leaving,
     .testimonial-slide.is-entering {
       animation: none;
+    }
+
+    .testimonial-slide.is-leaving {
+      display: none;
     }
   }
 
