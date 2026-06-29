@@ -15,6 +15,26 @@ const testimonials = testimonialsData.testimonials.map((t) => ({
   description="Hog Splitter Pro is a stopwatch built for curling: paired back-to-hog and hog-to-hog splits, glanceable history, no resets, an e-paper display, and USB-C charging."
   ogImage="/images/main.jpg"
 >
+  <aside class="fulfillment-notice" role="status">
+    <svg class="fulfillment-notice__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 8.25v4.5M12 16.5h.007"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    <p>Current fulfillment time for new orders is <strong>4&ndash;6 weeks</strong>.</p>
+  </aside>
+
   <section class="hero">
     <div>
       <p class="eyebrow">The curler's stopwatch</p>
@@ -411,6 +431,38 @@ const testimonials = testimonialsData.testimonials.map((t) => ({
 </script>
 
 <style>
+  .fulfillment-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    width: min(1120px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 0.9rem 1.15rem;
+    border: 1px solid #e8c84a;
+    border-left: 4px solid #c9a227;
+    border-radius: var(--radius);
+    background: #fff8dc;
+    color: #5c4a12;
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+
+  .fulfillment-notice__icon {
+    flex-shrink: 0;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.1rem;
+    color: #9a7b0a;
+  }
+
+  .fulfillment-notice p {
+    margin: 0;
+  }
+
+  .fulfillment-notice strong {
+    color: #3d3108;
+  }
+
   .testimonials {
     width: min(1120px, calc(100% - 2rem));
     margin: 0 auto;
